@@ -16,22 +16,11 @@ module.exports = {
 
     screens: {
       xs: "450px",
-      // => @media (min-width: 450px) { ... }
-
       sm: "575px",
-      // => @media (min-width: 576px) { ... }
-
       md: "768px",
-      // => @media (min-width: 768px) { ... }
-
       lg: "992px",
-      // => @media (min-width: 992px) { ... }
-
       xl: "1200px",
-      // => @media (min-width: 1200px) { ... }
-
       "2xl": "1400px",
-      // => @media (min-width: 1400px) { ... }
     },
     extend: {
       colors: {
@@ -74,6 +63,15 @@ module.exports = {
       },
       dropShadow: {
         three: "0px 5px 15px rgba(6, 8, 15, 0.05)",
+      },
+      animation: {
+        "scroll-loop": "scroll-loop 55s linear infinite",
+      },
+      keyframes: {
+        "scroll-loop": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
     },
   },

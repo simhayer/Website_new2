@@ -21,23 +21,21 @@ const Hero = () => {
               />
             </div>
             {/* Text Section */}
-            <div className="w-full px-4 md:flex-1 md:mr-40 md:ml-20">
+            <div className="w-full px-4 md:ml-20 md:mr-40 md:flex-1">
               <div className="mx-auto max-w-[800px]">
                 <h1 className="mb-5 text-2xl font-bold leading-tight text-black dark:text-white sm:text-2xl sm:leading-tight md:text-3xl md:leading-tight">
                   Buy, Sell, Live!
                 </h1>
-                <p className="mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-md md:text-md">
-                  BARS is revolutionizing the way you shop! Experience the
-                  thrill of live auctions and interactive shopping with sellers
-                  in real time. Looking for exclusive deals,
-                  unique products, or just want to enjoy the excitement of
-                  bidding against other shoppers, BARS brings it all right to
-                  your fingertips.
+                <p className="sm:text-md md:text-md mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark">
+                  Revolutionizing the way you shop! Experience live auctions and
+                  interactive shopping in real time. Exclusive deals, unique
+                  products, or want to enjoy the excitement of bidding against
+                  other shoppers, BARS brings it all to your fingertips.
                 </p>
                 <div className="flex flex-col items-center justify-start space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
                     href="https://apps.apple.com/ca/app/bars-live-shopping/id6737178573"
-                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-sm text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
+                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-base text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -51,7 +49,7 @@ const Hero = () => {
                   </Link>
                   <Link
                     href="https://play.google.com/store/apps/details?id=com.hayersimrat.bars"
-                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-sm text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
+                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-base text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

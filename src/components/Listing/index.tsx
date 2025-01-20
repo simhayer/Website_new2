@@ -11,7 +11,12 @@ import "swiper/css/navigation";
 import "../../styles/index.css";
 import ListingThumbnail from "../Common/ListingThumbnail";
 import { useRouter } from "next/navigation";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoMdCheckmarkCircleOutline,
+} from "react-icons/io";
+import LoadingDots from "../Common/LoadingDots";
 
 interface ListingProps {
   id: string;
@@ -24,7 +29,7 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchListing = async () => {
       if (!id) return;
 
       setLoading(true);
@@ -34,25 +39,43 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
           `${baseURL}${apiEndpoints.getListingById}/${id}`,
         );
         setListing(listingResponse.data.listing);
-
-        const relatedResponse = await axios.get(
-          `${baseURL}${apiEndpoints.getRelatedListings}/${id}`,
-        );
-
-        setRelatedListings(relatedResponse.data.relatedListings);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching main listing:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchListing();
   }, [id]);
 
-  if (loading) return <div className="mt-20 text-center">Loading...</div>;
+  // Fetch related listings separately
+  useEffect(() => {
+    const fetchRelatedListings = async () => {
+      if (!id) return;
+
+      try {
+        const relatedResponse = await axios.get(
+          `${baseURL}${apiEndpoints.getRelatedListings}/${id}`,
+        );
+        setRelatedListings(relatedResponse.data.relatedListings);
+      } catch (error) {
+        console.error("Error fetching related listings:", error);
+      }
+    };
+
+    fetchRelatedListings();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="h-full p-40">
+        <LoadingDots />
+      </div>
+    );
+  }
   if (!listing)
-    return <div className="mt-20 text-center">Listing not found</div>;
+    return <div className="mt-40 text-center">Listing not found</div>;
 
   return (
     <div className="mt-40 min-h-screen bg-white">
@@ -103,13 +126,32 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
         </div>
 
         {/* Right Section with Details */}
-        <div className="flex w-full flex-col justify-center px-4 lg:px-12">
-          <p className="mb-4 text-2xl font-bold text-gray-800">
-            ${listing.price}
-          </p>
-          <p className="text-md leading-relaxed text-gray-600">
+        <div className="= mt-4 flex w-full flex-col items-center px-4 sm:items-start lg:px-12">
+          {listing.product?.size && listing.product.size.trim() !== "" && (
+            <div className="mb-4 flex w-3/4 rounded-lg border p-4">
+              <p className="text-sm">Size</p>
+              <p className="ml-2 text-sm">{listing.product.size}</p>
+            </div>
+          )}
+
+          <div className="w-3/4 rounded-lg border p-4">
+            <p className="text-md mb-2 text-gray-800">Buy Now</p>
+            <p className="mb-4 text-2xl font-bold text-gray-800">
+              ${listing.price}
+            </p>
+            <div className="flex w-full justify-center ">
+              <button className="rounded-full bg-black px-6 py-2 text-white">
+                BUY ON APP
+              </button>
+            </div>
+          </div>
+          {/* <p className="text-md leading-relaxed text-gray-600">
             {listing.description}
-          </p>
+          </p> */}
+          <div className="mt-4 flex w-3/4 items-center border-t border-gray-200 p-2">
+            <IoMdCheckmarkCircleOutline />
+            <p className="ml-4 text-sm font-semibold">BARS Verified</p>
+          </div>
         </div>
       </div>
       <div className="w-full justify-center px-10">

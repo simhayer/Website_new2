@@ -59,6 +59,7 @@ export const apiEndpoints = {
   listScheduledStreamForSeller: "/auth/listScheduledStreamForSeller",
   handleListingCreation: "/auth/handleListingCreation",
   getListingsByUser: "/auth/getListingsByUser",
+  getListingById: "/auth/getListingById",
   deleteListings: "/auth/deleteListings",
   getAllListingsByPage: "/auth/getAllListingsByPage",
   getUserSellerPageDetails: "/auth/getUserSellerPageDetails",
@@ -71,6 +72,7 @@ export const apiEndpoints = {
   createStreamUserForAdmin: "/auth/createStreamUserForAdmin",
   updateUserInterestedCategories: "/auth/updateUserInterestedCategories",
   getListingsByProduct: "/auth/getListingsByProduct",
+  getRelatedListings: "/auth/getRelatedListings",
   // Add more API endpoints as needed
 };
 

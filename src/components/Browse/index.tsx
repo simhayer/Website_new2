@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { apiEndpoints, baseURL, productTypes } from "../../Resources/Constants";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import ListingThumbnail from "../Common/ListingThumbnail";
 
 // Loading Indicator Component
 const LoadingDots = () => (
@@ -68,6 +69,7 @@ const ListListings = () => {
   const [selectedTab, setSelectedTab] = useState("All");
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const router = useRouter();
 
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search");
@@ -147,20 +149,7 @@ const ListListings = () => {
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {listings.map((item) => (
-              <div
-                key={item._id}
-                className="rounded-lg border bg-white p-4 shadow hover:shadow-md"
-              >
-                <img
-                  src={`${baseURL}/${item.product.imageUrls[0]}`}
-                  alt={item.product.name}
-                  className="mb-4 aspect-square w-full rounded-lg object-contain"
-                />
-                <h3 className="mb-2 line-clamp-2 overflow-hidden text-sm font-semibold">
-                  {item.product.name}
-                </h3>
-                <p className="font-medium text-black">${item.price}</p>
-              </div>
+              <ListingThumbnail item={item} router={router} />
             ))}
           </div>
 

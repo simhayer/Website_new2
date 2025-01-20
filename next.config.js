@@ -4,7 +4,7 @@ const nextConfig = {
     domains: ["thebarss.com"], // Allow serving images from your domain
     unoptimized: true, // Optional: Disable static image optimization
   },
-  output: "export",
+  //output: "export",
   trailingSlash: true, // Optional for static hosting compatibility
   reactStrictMode: false,
 };

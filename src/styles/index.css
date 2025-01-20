@@ -31,3 +31,38 @@
     @apply opacity-100;
   }
 }
+
+.swiper-container {
+  position: relative; /* Make this container the positioning context */
+}
+
+.swiper-button {
+  display: flex;
+  position: absolute;
+  top: 50%; /* Vertically center */
+  transform: translateY(-50%); /* Adjust for centering */
+  z-index: 10;
+  cursor: pointer;
+}
+
+.swiper-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.image-swiper-button-prev {
+  left: -30px; /* Adjust this value to position the button closer to the Swiper */
+}
+
+.image-swiper-button-next {
+  right: -30px; /* Adjust this value to position the button closer to the Swiper */
+}
+
+.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #000 !important;
+}

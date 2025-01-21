@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { apiEndpoints, baseURL, productTypes } from "../../Resources/Constants";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -42,19 +42,22 @@ const ListListings = () => {
     searchParams.get("category") || "All",
   );
 
-  const loadListings = async (reset = false, newPage = 1, category = "All") => {
-    setLoading(true);
-    const data = await fetchListings(newPage, searchQuery, category);
+  const loadListings = useCallback(
+    async (reset = false, newPage = 1, category = "All") => {
+      setLoading(true);
+      const data = await fetchListings(newPage, searchQuery, category);
 
-    if (reset) {
-      setListings(data); // Replace listings
-    } else {
-      setListings((prev) => [...prev, ...data]); // Append listings
-    }
+      if (reset) {
+        setListings(data);
+      } else {
+        setListings((prev) => [...prev, ...data]);
+      }
 
-    setHasMore(data.length > 0); // Check if more items exist
-    setLoading(false);
-  };
+      setHasMore(data.length > 0);
+      setLoading(false);
+    },
+    [searchQuery],
+  );
 
   useEffect(() => {
     // Decode the category query to handle special characters

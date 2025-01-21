@@ -17,6 +17,7 @@ import {
   IoMdCheckmarkCircleOutline,
 } from "react-icons/io";
 import LoadingDots from "../Common/LoadingDots";
+import AppPopup from "../Common/AppPopup";
 
 interface ListingProps {
   id: string;
@@ -27,6 +28,12 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
   const [relatedListings, setRelatedListings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  const [showAppPopup, setShowAppPopup] = useState<boolean>(false);
+
+  const toggleShowAppPopup = () => {
+    setShowAppPopup(!showAppPopup);
+  };
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -78,7 +85,7 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
     return <div className="mt-40 text-center">Listing not found</div>;
 
   return (
-    <div className="mt-40 min-h-screen bg-white">
+    <div className="mt-24 min-h-screen bg-white sm:mt-40">
       <div className="flex w-full justify-center">
         <h1 className="my-4 text-xl font-semibold">{listing.product.name}</h1>
       </div>
@@ -140,7 +147,10 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
               ${listing.price}
             </p>
             <div className="flex w-full justify-center ">
-              <button className="rounded-full bg-black px-6 py-2 text-white">
+              <button
+                onClick={toggleShowAppPopup}
+                className="rounded-full bg-black px-6 py-2 text-white"
+              >
                 BUY ON APP
               </button>
             </div>
@@ -192,6 +202,17 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
           </div>
         )}
       </div>
+      {showAppPopup && (
+        <div>
+          {/* <AppPopup /> */}
+          <div
+            className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
+            onClick={toggleShowAppPopup}
+          >
+            <AppPopup />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

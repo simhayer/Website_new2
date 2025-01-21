@@ -1,45 +1,9 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { apiEndpoints, baseURL, productTypes } from "../../Resources/Constants";
 import { useRouter, useSearchParams } from "next/navigation";
 import ListingThumbnail from "../Common/ListingThumbnail";
 import LoadingDots from "../Common/LoadingDots";
-
-// Loading Indicator Component
-// const LoadingDots = () => (
-//   <div className="mt-4 flex items-center justify-center">
-//     <span className="dot bg-gray-500"></span>
-//     <span className="dot bg-gray-500"></span>
-//     <span className="dot bg-gray-500"></span>
-//     <style jsx>{`
-//       .dot {
-//         height: 7px;
-//         width: 7px;
-//         margin: 0 5px;
-//         border-radius: 50%;
-//         animation: blink 1.5s infinite;
-//       }
-//       .dot:nth-child(2) {
-//         animation-delay: 0.3s;
-//       }
-//       .dot:nth-child(3) {
-//         animation-delay: 0.6s;
-//       }
-//       @keyframes blink {
-//         0%,
-//         80%,
-//         100% {
-//           opacity: 0;
-//         }
-//         40% {
-//           opacity: 1;
-//         }
-//       }
-//     `}</style>
-//   </div>
-// );
 
 const fetchListings = async (
   pageNum = 1,
@@ -74,10 +38,13 @@ const ListListings = () => {
 
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search");
+  const categoryQuery = decodeURIComponent(
+    searchParams.get("category") || "All",
+  );
 
-  const loadListings = async (reset = false, newPage = 1) => {
+  const loadListings = async (reset = false, newPage = 1, category = "All") => {
     setLoading(true);
-    const data = await fetchListings(newPage, searchQuery, selectedTab);
+    const data = await fetchListings(newPage, searchQuery, category);
 
     if (reset) {
       setListings(data); // Replace listings
@@ -90,9 +57,18 @@ const ListListings = () => {
   };
 
   useEffect(() => {
+    // Decode the category query to handle special characters
+    const decodedCategory = decodeURIComponent(categoryQuery || "All");
+
+    if (decodedCategory && tabs.includes(decodedCategory)) {
+      setSelectedTab(decodedCategory);
+    } else {
+      setSelectedTab("All");
+    }
+
     setPage(1);
-    loadListings(true, 1);
-  }, [selectedTab, searchQuery]);
+    loadListings(true, 1, decodedCategory);
+  }, [categoryQuery, searchQuery]);
 
   const handleLoadMore = async () => {
     if (hasMore && !loading) {
@@ -102,14 +78,24 @@ const ListListings = () => {
     }
   };
 
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+    const encodedTab = encodeURIComponent(tab); // Encode the tab to handle special characters
+    router.push(
+      `?category=${encodedTab}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}`,
+    );
+  };
+
   const handleClearAll = async () => {
     const queryParams = new URLSearchParams(searchParams.toString());
     queryParams.delete("search");
+    queryParams.delete("category");
     window.history.replaceState(null, "", `?${queryParams.toString()}`);
+    setSelectedTab("All");
   };
 
   return (
-    <div className="mt-40 min-h-screen bg-white p-4">
+    <div className="mt-28 min-h-screen bg-white px-4 sm:mt-40">
       <div className="mx-auto flex max-w-screen-xl">
         {/* Category Tabs */}
         <div className="hidden w-1/4 p-4 sm:block">
@@ -118,7 +104,7 @@ const ListListings = () => {
             {tabs.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setSelectedTab(tab)}
+                onClick={() => handleTabClick(tab)}
                 className={`w-full rounded-lg py-1 text-left text-sm ${
                   selectedTab === tab
                     ? "font-bold"

@@ -5,6 +5,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
+import AppPopup from "../Common/AppPopup";
+import { IoIosDownload } from "react-icons/io";
 
 const Header = () => {
   // Navbar toggle
@@ -51,6 +53,12 @@ const Header = () => {
     setSearchInput(searchQuery);
   }, [searchParams]);
 
+  const [showAppPopup, setShowAppPopup] = useState<boolean>(false);
+
+  const toggleShowAppPopup = () => {
+    setShowAppPopup(!showAppPopup);
+  };
+
   return (
     <>
       <header
@@ -58,8 +66,8 @@ const Header = () => {
       >
         <div className="w-full">
           <div className="container">
-            <div className="relative -mx-4 mt-4 flex items-center justify-between">
-              <div className=" mt-1 w-auto max-w-full px-4 md:ml-12">
+            <div className="relative -mx-4 flex items-center justify-between sm:mt-4">
+              <div className="w-auto max-w-full px-4 md:ml-12">
                 <Link href="/" className="header-logo flex">
                   <Image
                     src="/images/logo/logo-2.svg"
@@ -83,32 +91,35 @@ const Header = () => {
                 </form>
               </div>
               <div className="sm:flex sm:w-full" />
-              <div className="mx-1 mt-3 flex">
+              <div className="mx-1 mt-1 flex">
                 <p className="text-md hidden font-bold text-gray-500 sm:block">
                   CAD
                 </p>
               </div>
+              <button onClick={toggleShowAppPopup} className="mx-3 ">
+                <IoIosDownload size={30} />
+              </button>
 
-              <div className="flex w-auto items-center justify-between px-4">
+              <div className="mb-1 flex w-auto items-center justify-between px-4">
                 <div>
                   <button
                     onClick={navbarToggleHandler}
                     id="navbarToggler"
                     aria-label="Mobile Menu"
-                    className="mt-12 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
+                    className="mt-9 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                   >
                     <span
-                      className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                      className={`relative mb-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 ${
                         navbarOpen ? " top-[7px] rotate-45" : " "
                       }`}
                     />
                     <span
-                      className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                      className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 ${
                         navbarOpen ? "opacity-0 " : " "
                       }`}
                     />
                     <span
-                      className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                      className={`relative mt-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300${
                         navbarOpen ? " top-[-8px] -rotate-45" : " "
                       }`}
                     />
@@ -224,6 +235,17 @@ const Header = () => {
             </div>
           </div>
         </div>
+        {showAppPopup && (
+          <div>
+            {/* <AppPopup /> */}
+            <div
+              className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
+              onClick={toggleShowAppPopup}
+            >
+              <AppPopup />
+            </div>
+          </div>
+        )}
       </header>
     </>
   );

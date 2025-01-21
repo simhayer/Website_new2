@@ -68,7 +68,7 @@ const ListListings = () => {
 
     setPage(1);
     loadListings(true, 1, decodedCategory);
-  }, [categoryQuery, searchQuery]);
+  }, [categoryQuery, searchQuery, tabs, loadListings]);
 
   const handleLoadMore = async () => {
     if (hasMore && !loading) {
@@ -136,7 +136,7 @@ const ListListings = () => {
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {listings.map((item) => (
-              <ListingThumbnail item={item} router={router} />
+              <ListingThumbnail key={item._id} item={item} router={router} />
             ))}
           </div>
 

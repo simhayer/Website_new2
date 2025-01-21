@@ -195,7 +195,7 @@ const Header = () => {
             <div className="flex animate-scroll-loop whitespace-nowrap py-1">
               <p className="mx-3 select-none text-xs text-white">BEST PRICES</p>
               <p className="mx-3 select-none text-xs text-white">
-                CANADA'S #1 COLLECTABLES AND LUXURY STORE
+                CANADA&apos;S #1 COLLECTABLES AND LUXURY STORE
               </p>
               <p className="mx-3 select-none text-xs text-white">
                 BUY, SELL, LIVE!
@@ -203,7 +203,7 @@ const Header = () => {
 
               <p className="mx-3 select-none text-xs text-white">BEST PRICES</p>
               <p className="mx-3 select-none text-xs text-white">
-                CANADA'S #1 COLLECTABLES AND LUXURY STORE
+                CANADA&apos;S #1 COLLECTABLES AND LUXURY STORE
               </p>
               <p className="mx-3 select-none text-xs text-white">
                 BUY, SELL, LIVE!
@@ -211,7 +211,7 @@ const Header = () => {
 
               <p className="mx-3 select-none text-xs text-white">BEST PRICES</p>
               <p className="mx-3 select-none text-xs text-white">
-                CANADA'S #1 COLLECTABLES AND LUXURY STORE
+                CANADA&apos;S #1 COLLECTABLES AND LUXURY STORE
               </p>
               <p className="mx-3 select-none text-xs text-white">
                 BUY, SELL, LIVE!
@@ -219,7 +219,7 @@ const Header = () => {
 
               <p className="mx-3 select-none text-xs text-white">BEST PRICES</p>
               <p className="mx-3 select-none text-xs text-white">
-                CANADA'S #1 COLLECTABLES AND LUXURY STORE
+                CANADA&apos;S #1 COLLECTABLES AND LUXURY STORE
               </p>
               <p className="mx-3 select-none text-xs text-white">
                 BUY, SELL, LIVE!
@@ -227,7 +227,7 @@ const Header = () => {
 
               <p className="mx-3 select-none text-xs text-white">BEST PRICES</p>
               <p className="mx-3 select-none text-xs text-white">
-                CANADA'S #1 COLLECTABLES AND LUXURY STORE
+                CANADA&apos;S #1 COLLECTABLES AND LUXURY STORE
               </p>
               <p className="mx-3 select-none text-xs text-white">
                 BUY, SELL, LIVE!

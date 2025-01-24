@@ -35,7 +35,7 @@ const Hero = () => {
                 <div className="flex flex-col items-center justify-start space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
                     href="https://apps.apple.com/ca/app/bars-live-shopping/id6737178573"
-                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-base text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
+                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -49,7 +49,7 @@ const Hero = () => {
                   </Link>
                   <Link
                     href="https://play.google.com/store/apps/details?id=com.hayersimrat.bars"
-                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-base text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
+                    className="flex items-center space-x-2 rounded-sm bg-primary px-8 py-4 text-sm font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

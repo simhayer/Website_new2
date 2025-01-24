@@ -61,6 +61,7 @@ export const apiEndpoints = {
   getListingsByUser: "/auth/getListingsByUser",
   getListingById: "/auth/getListingById",
   deleteListings: "/auth/deleteListings",
+  getAllListings: "/auth/getAllListings",
   getAllListingsByPage: "/auth/getAllListingsByPage",
   getUserSellerPageDetails: "/auth/getUserSellerPageDetails",
   fetchScheduledStreamsForProfile: "/auth/fetchScheduledStreamsForProfile",

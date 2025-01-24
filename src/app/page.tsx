@@ -19,7 +19,11 @@ export const metadata: Metadata = {
     url: "https://thebarss.com",
   },
   creator: "Bars Inc.",
-  themeColor: "#f542a4",
+  metadataBase: new URL("https://thebarss.com"),
+};
+
+export const viewport = {
+  themeColor: "#ff6347", // Brand color
 };
 
 export default function Home() {

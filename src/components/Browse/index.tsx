@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { apiEndpoints, baseURL, productTypes } from "../../Resources/Constants";
-import { useRouter, useSearchParams } from "next/navigation";
 import ListingThumbnail from "../Common/ListingThumbnail";
 import LoadingDots from "../Common/LoadingDots";
+import { apiEndpoints, baseURL, productTypes } from "../../Resources/Constants";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const fetchListings = async (
   pageNum = 1,
@@ -27,20 +29,15 @@ const fetchListings = async (
   }
 };
 
-const ListListings = () => {
+const ListListings = ({ initialListings, initialCategory, searchQuery }) => {
   const [tabs] = useState(["All", ...productTypes]);
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState(initialListings);
   const [page, setPage] = useState(1);
-  const [selectedTab, setSelectedTab] = useState("All");
+  const [selectedTab, setSelectedTab] = useState(initialCategory || "All");
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(initialListings.length > 0);
   const router = useRouter();
-
   const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("search");
-  const categoryQuery = decodeURIComponent(
-    searchParams.get("category") || "All",
-  );
 
   const loadListings = useCallback(
     async (reset = false, newPage = 1, category = "All") => {
@@ -59,42 +56,33 @@ const ListListings = () => {
     [searchQuery],
   );
 
+  // React to changes in the category query parameter
   useEffect(() => {
-    // Decode the category query to handle special characters
-    const decodedCategory = decodeURIComponent(categoryQuery || "All");
-
-    if (decodedCategory && tabs.includes(decodedCategory)) {
-      setSelectedTab(decodedCategory);
-    } else {
-      setSelectedTab("All");
-    }
-
+    const categoryQuery = decodeURIComponent(
+      searchParams.get("category") || "All",
+    );
+    setSelectedTab(categoryQuery);
     setPage(1);
-    loadListings(true, 1, decodedCategory);
-  }, [categoryQuery, searchQuery, tabs, loadListings]);
+    loadListings(true, 1, categoryQuery);
+  }, [searchParams, loadListings]);
 
   const handleLoadMore = async () => {
     if (hasMore && !loading) {
       const nextPage = page + 1;
-      await loadListings(false, nextPage);
+      await loadListings(false, nextPage, selectedTab);
       setPage(nextPage);
     }
   };
 
   const handleTabClick = (tab) => {
-    setSelectedTab(tab);
     const encodedTab = encodeURIComponent(tab); // Encode the tab to handle special characters
     router.push(
       `?category=${encodedTab}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}`,
     );
   };
 
-  const handleClearAll = async () => {
-    const queryParams = new URLSearchParams(searchParams.toString());
-    queryParams.delete("search");
-    queryParams.delete("category");
-    window.history.replaceState(null, "", `?${queryParams.toString()}`);
-    setSelectedTab("All");
+  const handleClearAll = () => {
+    router.push("/");
   };
 
   return (

@@ -1,4 +1,6 @@
 import { baseURL } from "@/Resources/Constants";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface ListingThumbnailProps {
@@ -23,11 +25,17 @@ const ListingThumbnail: React.FC<ListingThumbnailProps> = ({
       className="rounded-lg border bg-white p-4 shadow hover:shadow-md"
       onClick={() => router.push(`/listing/${item._id}`)}
     >
-      <img
-        src={`${baseURL}/${item.product.imageUrls[0]}`}
-        alt={item.product.name}
-        className="mb-4 aspect-square w-full rounded-lg object-contain"
-      />
+      <Link href={`/listing/${item._id}`} legacyBehavior>
+        <a>
+          <Image
+            src={`${baseURL}/${item.product.imageUrls[0]}`}
+            alt={item.product.name}
+            width={300}
+            height={300}
+            className="mb-4 aspect-square w-full rounded-lg object-contain"
+          />
+        </a>
+      </Link>
       <h3 className="mb-2 line-clamp-2 min-h-[2.5rem] text-sm font-semibold">
         {item.product.name}
       </h3>

@@ -92,7 +92,7 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
       <div className="w-full sm:flex">
         {/* Left Section with Swipable Images */}
         <div className="flex items-center justify-center sm:w-2/4">
-          <div className="swiper-container w-2/4">
+          <div className="swiper-container w-3/4 sm:w-2/4">
             <div className="swiper-button image-swiper-button-next">
               <IoIosArrowForward />
             </div>
@@ -135,13 +135,13 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
         {/* Right Section with Details */}
         <div className="= mt-4 flex w-full flex-col items-center px-4 sm:items-start lg:px-12">
           {listing.product?.size && listing.product.size.trim() !== "" && (
-            <div className="mb-4 flex w-3/4 rounded-lg border p-4">
+            <div className="mb-4 flex w-full rounded-lg border p-4 sm:w-3/4">
               <p className="text-sm">Size</p>
               <p className="ml-2 text-sm">{listing.product.size}</p>
             </div>
           )}
 
-          <div className="w-3/4 rounded-lg border p-4">
+          <div className="w-full rounded-lg border p-4 sm:w-3/4">
             <p className="text-md mb-2 text-gray-800">Buy Now</p>
             <p className="mb-4 text-2xl font-bold text-gray-800">
               ${listing.price}
@@ -158,7 +158,7 @@ const Listing: React.FC<ListingProps> = ({ id }) => {
           {/* <p className="text-md leading-relaxed text-gray-600">
             {listing.description}
           </p> */}
-          <div className="mt-4 flex w-3/4 items-center border-t border-gray-200 p-2">
+          <div className="mt-4 flex w-full items-center border-t border-gray-200 p-2 sm:w-3/4">
             <IoMdCheckmarkCircleOutline />
             <p className="ml-4 text-sm font-semibold">BARS Verified</p>
           </div>

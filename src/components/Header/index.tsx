@@ -66,7 +66,7 @@ const Header = () => {
       >
         <div className="w-full">
           <div className="container">
-            <div className="relative -mx-4 flex items-center justify-between sm:mt-4">
+            <div className="relative flex items-center justify-between sm:mt-4">
               <div className="w-auto max-w-full px-4 md:ml-12">
                 <Link href="/" className="header-logo flex">
                   <Image
@@ -146,6 +146,7 @@ const Header = () => {
                             ? "text-primary dark:text-white"
                             : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                         }`}
+                        onClick={() => setNavbarOpen(false)}
                       >
                         {menuItem.title}
                       </Link>

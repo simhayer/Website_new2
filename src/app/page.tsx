@@ -6,9 +6,20 @@ import Testimonials from "@/components/Testimonials";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bars - Home",
-  description: "Bars - Home",
-  // other metadata
+  title: "Bars - Live Auctions & Interactive Shopping",
+  description:
+    "Join Bars for live auctions and interactive shopping. Discover exclusive deals, unique products, and real-time shopping excitement!",
+  keywords:
+    "live auctions, interactive shopping, unique products, exclusive deals, real-time shopping",
+  openGraph: {
+    title: "Bars - Live Auctions & Interactive Shopping",
+    description:
+      "Join Bars for live auctions and interactive shopping. Discover exclusive deals, unique products, and real-time shopping excitement!",
+    images: ["../public/hero/screenshotWithPhone.png"],
+    url: "https://thebarss.com",
+  },
+  creator: "Bars Inc.",
+  themeColor: "#f542a4",
 };
 
 export default function Home() {
